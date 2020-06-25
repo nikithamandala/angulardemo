@@ -13,7 +13,7 @@ pipeline{
                       docker { image 'node:10' }
                   }
                   steps {
-                         echo Installing packages
+                         sh ' echo Installing packages '
                          sh ' npm install '
                          sh ' npm install -g @angular/cli@8 '
                          sh ' echo Building Angular Project '
