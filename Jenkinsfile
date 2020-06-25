@@ -22,7 +22,7 @@ pipeline{
              }
              stage("S3 Build") {
                   steps {
-                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'deploytos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
+                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'deploytos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){ 
                          sh 'aws s3api create-bucket --bucket ravi-varma-devulapally-new-1-2-com --region us-east-1'
                         }
                   }
@@ -41,9 +41,4 @@ pipeline{
        }
    }
     
-    }
-       }
-   }
-    
-}
 }
