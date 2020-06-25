@@ -20,38 +20,16 @@ pipeline{
                          sh ' ng build '
                   }
              }
-            stage("S3 Build") {
+             stage("S3 Build") {
                   steps {
-                         stage("S3 Build") {
-                  steps {
-                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'angular_push', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-
-                         //aws cloudformation create-stack --stack-name S3bucketcreation --template-body file:cft.yaml
-                         sh 'aws s3api create-bucket --bucket jangatelugubucket --region us-east-1'
+                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'deploytos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) 
+                         sh 'aws s3api create-bucket --bucket ravi-varma-devulapally-new-1-2-com --region us-east-1'
                         }
                   }
               }
        }
    }
-    stage ('push'){
-      steps{
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'angular_push', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
-        sh 'aws s3 ls'
-        sh 'aws s3  ls s3://jangatelugubucket/'
-        sh 'ls .'
-        sh 'aws s3 sync ~/var/jenkins_home/workspace/angularproject@2/dist s3://jangatelugubucket/ --region us-east-1'
-      } 
-       }
-   }
-    
-    }
-}
-                         sh 'aws s3api create-bucket --bucket jangatelugubucket --region us-east-1'
-                        }
-                  }
-              }
-       }
-   }
+   
     stage ('push'){
       steps{
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'deploytos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
