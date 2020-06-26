@@ -22,8 +22,8 @@ pipeline{
              }
              stage("S3 Build") {
                   steps {
-                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'deploytos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){ 
-                         sh 'aws s3api create-bucket --bucket ravi-varma-devulapally-new-1-2-com --region us-east-1'
+                         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 's3toec2', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]){ 
+                         sh 'aws s3api create-bucket --bucket nikitha-mandala-new-1-2-com --region us-east-1'
                         }
                   }
               }
@@ -32,12 +32,11 @@ pipeline{
    
     stage ('push'){
       steps{
-        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'deploytos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
+        withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 's3toec2', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
         sh 'aws s3 ls'
         sh 'cd ../awspro@2/dist'
         sh 'echo $PWD'
-        //sh 'aws s3 ls s3://ravi-varma-devulapally-new-1-2-com'
-        sh 'aws s3 sync . s3://ravi-varma-devulapally-new-1-2-com/ --region us-east-1'
+        sh 'aws s3 sync . s3://nikitha-mandala-new-1-2-com --region us-east-1/ --region us-east-1'
       } 
        }
    }
