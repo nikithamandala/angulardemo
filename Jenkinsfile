@@ -35,7 +35,7 @@ pipeline{
         withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', accessKeyVariable: 'AWS_ACCESS_KEY_ID', credentialsId: 'deploytos3', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY']]) {
         sh 'aws s3 ls'
         sh 'aws s3 ls s3://ravi-varma-devulapally-new-1-2-com'
-        sh 'echo pwd'
+        sh 'pwd'
         sh 'aws s3 docker cp ~/var/jenkins_home/workspace/awspro@2/dist/ s3://ravi-varma-devulapally-new-1-2-com/ --region us-east-1'
       } 
        }
